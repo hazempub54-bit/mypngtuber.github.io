@@ -1,103 +1,515 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mypngtuber - الصفحة الرئيسية</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background: #2c3e50;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        nav {
-            background: #34495e;
-            padding: 0.5rem;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            width: 80%;
-            margin: 2rem auto;
-            background: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .hero {
-            text-align: center;
-            padding: 2rem 0;
-        }
-        .btn-edit {
-            display: inline-block;
-            background: #e74c3c;
-            color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNGTuber Hub</title>
+
+<style>
+
+/* ================= ROOT ================= */
+
+:root{
+    --bg-color:#121212;
+    --text-color:#ffffff;
+    --card-bg:#1c1c1c;
+    --accent:#00c3ff;
+    --shadow:rgba(0,0,0,0.5);
+}
+
+[data-theme="light"]{
+    --bg-color:#f4f4f9;
+    --text-color:#121212;
+    --card-bg:#ffffff;
+    --accent:#007bff;
+    --shadow:rgba(0,0,0,0.1);
+}
+
+*{
+    box-sizing:border-box;
+    transition:background-color .3s,color .3s;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:var(--bg-color);
+    color:var(--text-color);
+    font-family:Arial,sans-serif;
+    overflow-x:hidden;
+}
+
+/* ================= THEME BUTTON ================= */
+
+.theme-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    z-index:999;
+    font-weight:bold;
+    box-shadow:0 4px 12px var(--shadow);
+}
+
+/* ================= BANNER ================= */
+
+.banner{
+    width:100%;
+    height:420px;
+    background:url('https://i.ibb.co/zV7ncMQS/Gemini-Generated-Image-glsuslglsuslglsu-copy.png') center center/cover no-repeat;
+}
+
+/* ================= DOWNLOAD SECTION ================= */
+
+.download-section{
+    text-align:center;
+    padding:45px 20px;
+}
+
+.download-section h2{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.download-btn img{
+    width:100%;
+    max-width:320px;
+    border-radius:16px;
+    box-shadow:0 6px 20px var(--shadow);
+}
+
+.download-btn img:hover{
+    transform:scale(1.03);
+}
+
+/* ================= SLIDER ================= */
+
+.slider-container{
+    margin-top:20px;
+}
+
+.slider-container h2{
+    padding:0 42px;
+    margin-bottom:18px;
+}
+
+.slider-wrapper{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    padding:10px 42px;
+}
+
+.slider{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+}
+
+.slider::-webkit-scrollbar{
+    display:none;
+}
+
+/* CARD */
+
+.card{
+    min-width:250px;
+    width:250px;
+    height:250px;
+    border-radius:18px;
+    overflow:hidden;
+    flex-shrink:0;
+    cursor:pointer;
+    background:var(--card-bg);
+    box-shadow:0 4px 12px var(--shadow);
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:.25s;
+}
+
+.card:hover img{
+    transform:scale(1.04);
+}
+
+/* ARROWS */
+
+.arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    z-index:5;
+    box-shadow:0 4px 10px var(--shadow);
+}
+
+.left{
+    right:4px;
+}
+
+.right{
+    left:4px;
+}
+
+/* ================= SERVICES ================= */
+
+.services-section{
+    padding:70px 20px;
+    text-align:center;
+}
+
+.services-section h2{
+    margin-bottom:35px;
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    max-width:950px;
+    margin:auto;
+}
+
+.service-box{
+    background:var(--card-bg);
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 6px 20px var(--shadow);
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.service-box h3{
+    margin-top:0;
+    color:var(--accent);
+    line-height:1.7;
+}
+
+.service-price{
+    font-size:28px;
+    font-weight:bold;
+    margin:18px 0;
+}
+
+.service-price span{
+    display:block;
+    font-size:16px;
+    color:gray;
+    margin-top:5px;
+}
+
+.service-btn{
+    display:inline-block;
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    background:var(--accent);
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* ================= VIDEO ================= */
+
+.video-section{
+    text-align:center;
+    padding:30px 20px 90px;
+}
+
+.video-section h2{
+    margin-bottom:30px;
+}
+
+.video-wrapper{
+    width:100%;
+    max-width:360px;
+    height:640px;
+    margin:auto;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 25px var(--shadow);
+}
+
+.video-wrapper iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+.banner{
+    height:220px;
+}
+
+.download-section h2{
+    font-size:24px;
+}
+
+.slider-wrapper{
+    padding:8px 38px;
+}
+
+.card{
+    min-width:220px;
+    width:220px;
+    height:220px;
+}
+
+.arrow{
+    width:32px;
+    height:32px;
+    font-size:15px;
+}
+
+.video-wrapper{
+    max-width:100%;
+    height:520px;
+}
+
+.services-grid{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
 </head>
-<body>
 
-<header>
-    <h1>mypngtuber</h1>
-</header>
+<body data-theme="dark">
 
-<nav>
-    <a href="https://sites.google.com/view/mypngtuberr/home">الرئيسية</a>
-    <a href="#">النماذج (Models)</a>
-    <a href="#">عن البرنامج</a>
-</nav>
+<!-- THEME BUTTON -->
 
-<div class="container">
-    <section class="hero">
-        <h2>مرحباً بك في mypngtuber</h2>
-        <p>الأداة الأسهل لصناع المحتوى (Vtubers) لاستخدام صور PNG كشخصيات افتراضية واجهة عربية وبسيطة.</p>
-        
-        <a class="btn-edit" href="/u/0/d/1qudObb9iDZGigkPfBRvVb6C6jMgGW3xW/p/16ZCps69QA5wSAyUNgDWHDJO8A88D0fDv/edit?authuser=0&amp;usp=edit_published_site">
-            تعديل هذه الصفحة
-        </a>
-    </section>
+<button class="theme-btn" onclick="toggleTheme()">
+☀️ / 🌙
+</button>
 
-    <hr>
+<!-- BANNER -->
 
-    <section>
-        <h3>المميزات:</h3>
-        <ul>
-            <li>واجهة بسيطة وسهلة الاستخدام.</li>
-            <li>دعم كامل للغة العربية.</li>
-            <li>إمكانية إدخال "موديل" والبدء مباشرة.</li>
-        </ul>
-    </section>
+<div class="banner"></div>
+
+<!-- DOWNLOAD -->
+
+<div class="download-section">
+
+<h2>حمل البرنامج الآن على ويندوز</h2>
+
+<a href="https://www.mediafire.com/file/bjyvesmv4otdaam/mypngtuberr.exe/file"
+target="_blank"
+class="download-btn">
+
+<img src="https://i.ibb.co/rGjhm6XB/Download-for-Windows.webp"
+alt="Download">
+
+</a>
+
 </div>
 
-<footer>
-    <p>&copy; 2026 mypngtuber - تم الإنشاء عبر Google Sites</p>
-</footer>
+<!-- FREE MODELS -->
+
+<div class="slider-container">
+
+<h2>موديلات PNGTuber مجانية</h2>
+
+<div class="slider-wrapper">
+
+<button class="arrow left" onclick="scrollLeftCustom()">❮</button>
+
+<div class="slider" id="slider">
+
+<!-- 1 -->
+<div class="card"
+onclick="window.open('https://www.mediafire.com/file/cxn0nsjaztiytj9/free_meow.mvt/file','_blank')">
+
+<img src="https://i.ibb.co/B5n9pc5w/freemewo.png">
+
+</div>
+
+<!-- 2 -->
+<div class="card"
+onclick="window.open('https://www.mediafire.com/file/bbkue96dk8rdepk/Kairo_Shade.mvt/file','_blank')">
+
+<img src="https://i.ibb.co/DP91LrRG/Gemini-Generated-Image-48me4q48me4q48me.png">
+
+</div>
+
+<!-- PLACEHOLDERS -->
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+<div class="card">
+<img src="https://i.ibb.co/DPBNkkhZ/Gemini-Generated-Image-9ftljc9ftljc9ftl.png">
+</div>
+
+</div>
+
+<button class="arrow right" onclick="scrollRightCustom()">❯</button>
+
+</div>
+
+</div>
+
+<!-- SERVICES -->
+
+<div class="services-section">
+
+<h2>ادعمنا عن طريق</h2>
+
+<div class="services-grid">
+
+<div class="service-box">
+
+<h3>حول الموديل الجاهز الخاص بك إلى .mvt</h3>
+
+<div class="service-price">
+25 جنيه
+<span>نصف دولار</span>
+</div>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSex8lX4NeF2wBw3MMKvqJVnTHK96ZoTKSA8AijylEvrMBs7Mg/viewform"
+target="_blank"
+class="service-btn">
+
+اطلب التحويل
+
+</a>
+
+</div>
+
+<div class="service-box">
+
+<h3>الحصول على موديل خاص بك</h3>
+
+<div class="service-price">
+50 جنيه
+<span>1 دولار</span>
+</div>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSe8G-ozRrG7fuGMzChAsTIYlCgZJ_oSXAbnqyCFoNhtaPKUog/viewform"
+target="_blank"
+class="service-btn">
+
+اطلب الموديل
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- VIDEO -->
+
+<div class="video-section">
+
+<h2>شرح البرنامج</h2>
+
+<div class="video-wrapper">
+
+<iframe
+src="https://www.youtube.com/embed/cQnaqf-p_qo"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+<script>
+
+/* SLIDER */
+
+const slider = document.getElementById("slider");
+
+function scrollRightCustom(){
+
+slider.scrollBy({
+left:-264,
+behavior:"smooth"
+});
+
+}
+
+function scrollLeftCustom(){
+
+slider.scrollBy({
+left:264,
+behavior:"smooth"
+});
+
+}
+
+/* THEME */
+
+function toggleTheme(){
+
+const body = document.body;
+
+if(body.getAttribute("data-theme")==="dark"){
+
+body.setAttribute("data-theme","light");
+
+}else{
+
+body.setAttribute("data-theme","dark");
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
